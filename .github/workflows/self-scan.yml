@@ -1,0 +1,38 @@
+name: instruction-guard-demo
+
+# Runs the scanner against the bundled demo repo, which contains a planted
+# "rug pull" attack, so the Actions tab visibly shows the gate going red.
+# Remove `continue-on-error` to make it a true blocking gate.
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  guard:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - run: pip install -e .
+
+      - name: Scan demo repo (expected to FAIL - planted attack)
+        id: scan
+        continue-on-error: true
+        run: |
+          instruction-guard scan \
+            --root examples/demo-repo \
+            --lock examples/demo-repo/instruction-guard.lock.json \
+            --sarif instruction-guard.sarif \
+            --fail-on high
+
+      - name: Upload SARIF to code scanning
+        if: always()
+        uses: github/codeql-action/upload-sarif@v3
+        with:
+          sarif_file: instruction-guard.sarif

@@ -1,0 +1,14 @@
+{
+  "files": {
+    "AGENTS.md": {
+      "bytes": 211,
+      "sha256": "78b358c7628a5d82f1eaf5eeed35934028cf6754903b456bd15839ea09629108"
+    },
+    "mcp.json": {
+      "bytes": 268,
+      "sha256": "20e70539c09c7544e8b55fac38571c50fc67e8ad045466c0a89cfbdb53919723"
+    }
+  },
+  "generator": "instruction-guard",
+  "lockfileVersion": 1
+}

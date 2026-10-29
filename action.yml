@@ -1,0 +1,42 @@
+name: "Instruction Supply Chain Guard"
+description: "Inventory, scan, lock and detect drift in the instruction artifacts AI agents obey (prompts, skills, MCP manifests, rules files)."
+author: "Sawan Bhan"
+branding:
+  icon: "shield"
+  color: "purple"
+
+inputs:
+  root:
+    description: "Directory to scan."
+    required: false
+    default: "."
+  lock:
+    description: "Path to the instruction-guard lockfile."
+    required: false
+    default: "instruction-guard.lock.json"
+  fail-on:
+    description: "Minimum severity that fails the run: high | medium | low."
+    required: false
+    default: "high"
+  sarif:
+    description: "Path to write the SARIF report."
+    required: false
+    default: "instruction-guard.sarif"
+  no-lock:
+    description: "Skip the lockfile drift check and scan content only (true/false)."
+    required: false
+    default: "false"
+
+outputs:
+  sarif:
+    description: "Path to the generated SARIF file."
+
+runs:
+  using: "docker"
+  image: "Dockerfile"
+  env:
+    INPUT_ROOT: ${{ inputs.root }}
+    INPUT_LOCK: ${{ inputs.lock }}
+    INPUT_FAIL_ON: ${{ inputs.fail-on }}
+    INPUT_SARIF: ${{ inputs.sarif }}
+    INPUT_NO_LOCK: ${{ inputs.no-lock }}
