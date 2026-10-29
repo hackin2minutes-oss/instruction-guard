@@ -8,7 +8,7 @@ LABEL org.opencontainers.image.title="instruction-guard" \
 WORKDIR /app
 COPY instruction_guard/ /app/instruction_guard/
 COPY pyproject.toml README.md /app/
-RUN pip install --no-cache-dir .
+RUN pip install --no-cache-dir ".[sign]"
 
 COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh

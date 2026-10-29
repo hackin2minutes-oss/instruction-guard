@@ -82,7 +82,7 @@ def render_sarif(findings: list[Finding]) -> str:
             "tool": {"driver": {
                 "name": TOOL_NAME,
                 "informationUri": TOOL_URI,
-                "version": "0.1.0",
+                "version": "0.2.0",
                 "rules": rules,
             }},
             "results": results,

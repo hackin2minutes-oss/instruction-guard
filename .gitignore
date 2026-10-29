@@ -7,3 +7,7 @@ dist/
 *.sarif
 .venv/
 venv/
+
+# signing private key - never commit
+instruction-guard.key
+*.key
