@@ -1,0 +1,14 @@
+{
+  "files": {
+    "examples/demo-repo/AGENTS.md": {
+      "bytes": 211,
+      "sha256": "78b358c7628a5d82f1eaf5eeed35934028cf6754903b456bd15839ea09629108"
+    },
+    "examples/demo-repo/mcp.json": {
+      "bytes": 373,
+      "sha256": "db9f0b83eb8cdddc18710139311d8484c6b1b1a755652972bca33e3d3124f930"
+    }
+  },
+  "generator": "instruction-guard",
+  "lockfileVersion": 1
+}
