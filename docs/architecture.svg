@@ -1,0 +1,93 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 620" font-family="Segoe UI, Arial, sans-serif">
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L8,3 L0,6 z" fill="#4b5563"/>
+    </marker>
+    <style>
+      .title { font-size: 26px; font-weight: 700; fill: #111827; }
+      .sub { font-size: 14px; fill: #6b7280; }
+      .box { fill: #ffffff; stroke: #d1d5db; stroke-width: 1.5; rx: 10; }
+      .boxlabel { font-size: 15px; font-weight: 600; fill: #111827; }
+      .boxdesc { font-size: 12px; fill: #6b7280; }
+      .stage { font-size: 13px; font-weight: 700; fill: #6d28d9; letter-spacing: 1px; }
+      .flow { stroke: #4b5563; stroke-width: 2; fill: none; }
+      .guard { fill: #f5f3ff; stroke: #6d28d9; stroke-width: 2; }
+      .fail { fill: #fef2f2; stroke: #dc2626; stroke-width: 1.5; }
+      .pass { fill: #f0fdf4; stroke: #16a34a; stroke-width: 1.5; }
+      .pill { font-size: 12px; font-weight: 600; }
+    </style>
+  </defs>
+
+  <text x="40" y="46" class="title">Instruction Supply Chain Guard</text>
+  <text x="40" y="70" class="sub">Governing the third AI supply chain: the instructions agents obey</text>
+
+  <!-- Stage 1: inputs -->
+  <text x="40" y="118" class="stage">INSTRUCTION ARTIFACTS</text>
+  <g>
+    <rect x="40" y="130" width="230" height="56" class="box" rx="10"/>
+    <text x="55" y="156" class="boxlabel">System prompts &amp; skills</text>
+    <text x="55" y="174" class="boxdesc">SKILL.md, *.prompt, prompts/**</text>
+
+    <rect x="40" y="196" width="230" height="56" class="box" rx="10"/>
+    <text x="55" y="222" class="boxlabel">MCP tool manifests</text>
+    <text x="55" y="240" class="boxdesc">mcp.json, *.mcp.json</text>
+
+    <rect x="40" y="262" width="230" height="56" class="box" rx="10"/>
+    <text x="55" y="288" class="boxlabel">Agent rules files</text>
+    <text x="55" y="306" class="boxdesc">AGENTS.md, CLAUDE.md, .cursorrules</text>
+  </g>
+
+  <!-- Stage 2: the guard -->
+  <text x="370" y="118" class="stage">INSTRUCTION GUARD (CI)</text>
+  <rect x="370" y="130" width="250" height="300" class="guard" rx="12"/>
+  <text x="385" y="158" class="boxlabel" fill="#6d28d9">Scan engine</text>
+
+  <rect x="388" y="172" width="214" height="52" class="box" rx="8"/>
+  <text x="400" y="194" class="boxlabel">Inventory + hash</text>
+  <text x="400" y="212" class="boxdesc">sha256 of every file</text>
+
+  <rect x="388" y="232" width="214" height="52" class="box" rx="8"/>
+  <text x="400" y="254" class="boxlabel">Lockfile diff</text>
+  <text x="400" y="272" class="boxdesc">drift / unlocked (IG003/IG004)</text>
+
+  <rect x="388" y="292" width="214" height="52" class="box" rx="8"/>
+  <text x="400" y="314" class="boxlabel">Invisible Unicode</text>
+  <text x="400" y="332" class="boxdesc">zero-width, bidi, tags (IG001)</text>
+
+  <rect x="388" y="352" width="214" height="52" class="box" rx="8"/>
+  <text x="400" y="374" class="boxlabel">Directive scan</text>
+  <text x="400" y="392" class="boxdesc">override / exfil / escalate (IG002)</text>
+
+  <!-- Stage 3: outcomes -->
+  <text x="720" y="118" class="stage">GATE &amp; OUTPUT</text>
+
+  <rect x="720" y="130" width="240" height="70" class="fail" rx="10"/>
+  <text x="735" y="158" class="boxlabel" fill="#dc2626">FAIL build (exit 1)</text>
+  <text x="735" y="180" class="boxdesc">any change since approval, or</text>
+  <text x="735" y="196" class="boxdesc">hidden / malicious instruction</text>
+
+  <rect x="720" y="214" width="240" height="60" class="pass" rx="10"/>
+  <text x="735" y="242" class="boxlabel" fill="#16a34a">PASS build (exit 0)</text>
+  <text x="735" y="262" class="boxdesc">all instructions unchanged &amp; clean</text>
+
+  <rect x="720" y="300" width="240" height="70" class="box" rx="10"/>
+  <text x="735" y="328" class="boxlabel">SARIF 2.1.0</text>
+  <text x="735" y="350" class="boxdesc">to GitHub Security tab,</text>
+  <text x="735" y="366" class="boxdesc">mapped to OWASP LLM Top 10</text>
+
+  <!-- flows -->
+  <path class="flow" d="M270 214 C 320 214, 330 270, 368 270" marker-end="url(#arrow)"/>
+  <path class="flow" d="M620 220 C 665 220, 680 165, 718 165" marker-end="url(#arrow)"/>
+  <path class="flow" d="M620 260 C 665 260, 680 244, 718 244" marker-end="url(#arrow)"/>
+  <path class="flow" d="M620 330 C 665 330, 680 334, 718 334" marker-end="url(#arrow)"/>
+
+  <!-- approval loop -->
+  <rect x="370" y="452" width="250" height="56" class="box" rx="10"/>
+  <text x="385" y="478" class="boxlabel">Human approval</text>
+  <text x="385" y="496" class="boxdesc">re-run init to re-sign the lockfile</text>
+  <path class="flow" stroke-dasharray="5,4" d="M495 452 C 495 420, 495 410, 495 346" marker-end="url(#arrow)"/>
+  <path class="flow" stroke-dasharray="5,4" d="M840 370 C 840 430, 640 480, 622 480" marker-end="url(#arrow)"/>
+
+  <text x="40" y="560" class="sub">Deterministic: no network, no API keys, no model calls. Runs in seconds in any CI runner.</text>
+  <text x="40" y="584" class="sub">(c) 2026 Sawan Bhan</text>
+</svg>
